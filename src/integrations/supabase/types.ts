@@ -14,13 +14,209 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      apartment_members: {
+        Row: {
+          apartment_id: string
+          id: string
+          joined_at: string
+          user_id: string
+        }
+        Insert: {
+          apartment_id: string
+          id?: string
+          joined_at?: string
+          user_id: string
+        }
+        Update: {
+          apartment_id?: string
+          id?: string
+          joined_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "apartment_members_apartment_id_fkey"
+            columns: ["apartment_id"]
+            isOneToOne: false
+            referencedRelation: "apartments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      apartments: {
+        Row: {
+          code: string
+          created_at: string
+          created_by: string
+          id: string
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          code: string
+          created_at?: string
+          created_by: string
+          id?: string
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          code?: string
+          created_at?: string
+          created_by?: string
+          id?: string
+          name?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      expense_splits: {
+        Row: {
+          amount: number
+          expense_id: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          expense_id: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          expense_id?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "expense_splits_expense_id_fkey"
+            columns: ["expense_id"]
+            isOneToOne: false
+            referencedRelation: "expenses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      expenses: {
+        Row: {
+          amount: number
+          apartment_id: string
+          created_at: string
+          created_by: string
+          date: string
+          id: string
+          paid_by: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          amount: number
+          apartment_id: string
+          created_at?: string
+          created_by: string
+          date?: string
+          id?: string
+          paid_by: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          amount?: number
+          apartment_id?: string
+          created_at?: string
+          created_by?: string
+          date?: string
+          id?: string
+          paid_by?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "expenses_apartment_id_fkey"
+            columns: ["apartment_id"]
+            isOneToOne: false
+            referencedRelation: "apartments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      settlements: {
+        Row: {
+          amount: number
+          apartment_id: string
+          created_at: string
+          from_user: string
+          id: string
+          note: string | null
+          to_user: string
+        }
+        Insert: {
+          amount: number
+          apartment_id: string
+          created_at?: string
+          from_user: string
+          id?: string
+          note?: string | null
+          to_user: string
+        }
+        Update: {
+          amount?: number
+          apartment_id?: string
+          created_at?: string
+          from_user?: string
+          id?: string
+          note?: string | null
+          to_user?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "settlements_apartment_id_fkey"
+            columns: ["apartment_id"]
+            isOneToOne: false
+            referencedRelation: "apartments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      generate_apartment_code: {
+        Args: Record<PropertyKey, never>
+        Returns: string
+      }
     }
     Enums: {
       [_ in never]: never
